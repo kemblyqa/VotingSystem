@@ -1,3 +1,6 @@
+//Global variable with the class VotingSetting
+var votingSetting;
+
 /** 
  * Function that create a interface based in a json file.
  * @param {*} settings json to set the interface.
@@ -5,6 +8,11 @@
 function updateVoting(settings) {
     // Parse string to json.
     var settings = JSON.parse((settings))
+
+    //create variables with data of json
+    var {descripcion,opciones, modalidad, enBlanco, publica}= settings;
+    votingSetting = new VotingSetting(descripcion, opciones, modalidad.modo, modalidad.cantidad, enBlanco, publica);
+
     // Set question title from settings.
     document.getElementById("question_text").innerHTML = settings.descripcion;
     // Set options title from settings.
@@ -26,6 +34,7 @@ function generateOptions(settings) {
         var checkbox = document.createElement('input');
         checkbox.type = "checkbox";
         checkbox.id = "option_" + i;
+        checkbox.name = "voteCheck"
         // Create the label for the checkbox.
         var label = document.createElement('label');
         label.htmlFor = "option_" + i;
@@ -34,4 +43,27 @@ function generateOptions(settings) {
         container.appendChild(checkbox);
         container.appendChild(label);
     }
+}
+
+/**
+ * @function validateVoting used for check if the vote is valid or not
+ * @returns return response json with result of voting
+ */
+function validateVoting() {
+    var cont = 0; 
+    var checkboxes = document.getElementById("options_container").voteCheck;
+    for (var x in checkboxes) {
+        if (checkboxes[x].checked) {
+         cont = cont + 1;
+        }
+    }
+    console.log(cont)
+    showHide("hola")
+}
+
+function showHide(switchTextDiv) {
+    var x = document.getElementById("notification");
+    x.style.display = "block";
+    x.innerHTML = switchTextDiv
+
 }
