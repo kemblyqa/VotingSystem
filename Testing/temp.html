@@ -10,10 +10,15 @@
   </head>
   <body>
     <textarea id="text_json" rows="4" cols="50"> </textarea>
-    <input id="clickMe" type="button" value="clickme" onclick="updateVoting(document.getElementById('text_json').value);" />
+    <input
+      id="clickMe"
+      type="button"
+      value="clickme"
+      onclick="updateVoting(document.getElementById('text_json').value);"
+    />
     <h1 id="question_text">Pregunta</h1>
     <h2 id="options_title">Title</h2>
-    <form id="options_container" class="options_container">
+    <form id="options_container" class="options_container" method="POST">
 
     </form>
     <input id="clickMe" type="button" value="clickme" onclick="validateVoting();" />

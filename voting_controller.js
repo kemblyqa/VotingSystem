@@ -27,14 +27,22 @@ function updateVoting(settings) {
  */
 function generateOptions(settings) {
     // Get element where is going to add the new checkboxes.
-    var container = document.getElementById("options_container");
+    var container = document.getElementById("options_container")
+    // Remove all items added.
+    while (container.hasChildNodes()) {
+        container.removeChild(container.firstChild);
+    }
     // Create all options specified in settings.
     for (var i = 0; i < settings.opciones.length; i++) {
         // Create the checkbox.
         var checkbox = document.createElement('input');
-        checkbox.type = "checkbox";
+        if (settings.modalidad.cantidad == 1) {
+            checkbox.type = "radio";
+        } else {
+            checkbox.type = "checkbox";
+        }
         checkbox.id = "option_" + i;
-        checkbox.name = "voteCheck"
+        checkbox.name = "checkGroup "
         // Create the label for the checkbox.
         var label = document.createElement('label');
         label.htmlFor = "option_" + i;
@@ -53,7 +61,7 @@ function validateVoting() {
     //verify that mode type of voting is 'multiple' 
     if(votingSetting.getModeType()=="multiple"){
         var count = 0; 
-        var checkboxes = document.getElementById("options_container").voteCheck;
+        var checkboxes = document.getElementById("options_container").checkGroup;
         for (var element in checkboxes) {
             if (checkboxes[element].checked) {
                 count = count + 1;
