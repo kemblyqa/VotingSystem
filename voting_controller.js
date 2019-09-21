@@ -50,20 +50,48 @@ function generateOptions(settings) {
  * @returns return response json with result of voting
  */
 function validateVoting() {
-    var cont = 0; 
-    var checkboxes = document.getElementById("options_container").voteCheck;
-    for (var x in checkboxes) {
-        if (checkboxes[x].checked) {
-         cont = cont + 1;
+    //verify that mode type of voting is 'multiple' 
+    if(votingSetting.getModeType()=="multiple"){
+        var count = 0; 
+        var checkboxes = document.getElementById("options_container").voteCheck;
+        for (var element in checkboxes) {
+            if (checkboxes[element].checked) {
+                count = count + 1;
+            }
+        }
+        //verify if the quantity of choices is the same or less that the top quantity 
+        if((votingSetting.getModeQuantity()<=cont) && (votingSetting.getModeQuantity()>0)){
+            
+        }
+        else{
+            //verify if person can vote blank
+            if((votingSetting.getIsWhite()) && (count===0)){
+
+            }
+            //if the quantity is more that the top quantity or zero with isWhite false
+            else{
+
+            }
         }
     }
+    //the mode type is 'unica'
+    else{
+        
+    }
+   
     console.log(cont)
+    console.info(votingSetting.getOptions());
     showHide("hola")
 }
 
-function showHide(switchTextDiv) {
-    var x = document.getElementById("notification");
-    x.style.display = "block";
-    x.innerHTML = switchTextDiv
+/**
+ * @function showHide this function show notification when the person vote
+ * @param {string} text give the text for the notification
+ * @returns show in html the info
+ */
+function showHide(text) {
+    var divElement = document.getElementById("notification");
+    divElement.style.display = "block";
+    divElement.innerHTML = text
 
 }

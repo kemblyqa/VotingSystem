@@ -17,3 +17,26 @@ function VotingSetting(description ,options, mode_type, mode_quantity, isWhite, 
     this.public = public;
 }
 
+VotingSetting.prototype.getDescription = function(){
+    return this.description;
+} 
+
+VotingSetting.prototype.getOptions = function(){
+    return this.options;
+} 
+
+VotingSetting.prototype.getModeType = function(){
+    return this.mode_type;
+} 
+
+VotingSetting.prototype.getModeQuantity = function(){
+    return this.mode_quantity;
+} 
+
+VotingSetting.prototype.getIsWhite = function(){
+    return this.isWhite;
+} 
+
+VotingSetting.prototype.getPublic = function(){
+    return this.public;
+} 
