@@ -4,21 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Sistema de votación</title>
     <link rel="stylesheet" href="style.css" />
     <script src="../voting_controller.js"></script>
     <script src="../voting_settings.js"></script>
+    <title>Ballot</title>
   </head>
-  <body>
+  <body onload="callUpdateVoting()">
     <table id="table_login">
       <tr id="title_row">
         <td>
-          <h1 id="title_login">BIENVENIDO AL SISTEMA DE VOTACION</h1>
+          <h1 id="question_text"></h1>
+          <h3 id="options_title"></h3>
         </td>
       </tr>
       <tr id="text_row">
         <td>
-          <textarea id="text_json" rows="4" cols="50"> </textarea>
+          <form
+            id="options_container"
+            class="options_container"
+            method="POST"
+          ></form>
         </td>
       </tr>
       <tr id="btn_row">
@@ -26,8 +31,14 @@
           <input
             id="btn_Login"
             type="button"
-            value="INICIAR VOTACION"
-            onclick="callVotingPag(document.getElementById('text_json').value);"
+            value="clickme"
+            onclick="validateVoting();"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div id="notification" style="display: none;"></div>
         </td>
       </tr>
     </table>
