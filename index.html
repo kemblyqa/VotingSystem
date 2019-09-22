@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,18 @@
     <title>Sistema de votación</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+    <div style="width: 50%; height: 200px" id="container">
+        <label for="vote1">Voto 1</label>
+        <input type="checkbox" name="voting_opts" id="vote1">
+        <label for="vote2">Voto 2</label>
+        <input type="checkbox" name="voting_opts" id="vote2">
+        <label for="vote3">Voto 3</label>
+        <input type="checkbox" name="voting_opts" id="vote3">
+    </div>
+    <script src="voting_controller.js"></script>
+
 </body>
+
 </html>
