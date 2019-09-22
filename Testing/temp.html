@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <script src="../voting_controller.js"></script>
-    <link rel="stylesheet" href="style.css" />
+    <script src="../voting_settings.js"></script>
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <textarea id="text_json" rows="4" cols="50"> </textarea>
@@ -18,6 +19,9 @@
     <h1 id="question_text">Pregunta</h1>
     <h2 id="options_title">Title</h2>
     <form id="options_container" class="options_container" method="POST">
+
     </form>
+    <input id="clickMe" type="button" value="clickme" onclick="validateVoting();" />
+    <div id="notification" style="display: none;"></div>
   </body>
 </html>

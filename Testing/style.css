@@ -14,3 +14,11 @@
   border-radius: 5px;
 }
 
+#notification {
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  background-color: rgb(192, 205, 209);
+  margin-top: 10px;
+  
+}

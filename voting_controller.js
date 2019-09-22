@@ -1,10 +1,19 @@
+//Global variable with the class VotingSetting
+var votingSetting;
+
 /** 
  * Function that create a interface based in a json file.
- * @param {*} settings json to set the interface.
+ * @param {string} settings json to set the interface.
  */
 function updateVoting(settings) {
     // Parse string to json.
+    votingSetting = null;
     var settings = JSON.parse((settings))
+
+    //create variables with data of json
+    var {descripcion,opciones, modalidad, enBlanco, publica}= settings;
+    votingSetting = new VotingSetting(descripcion, opciones, modalidad.modo, modalidad.cantidad, enBlanco, publica);
+
     // Set question title from settings.
     document.getElementById("question_text").innerHTML = settings.descripcion;
     // Set options title from settings.
@@ -13,9 +22,10 @@ function updateVoting(settings) {
     //  Call the function to generate all options.
     generateOptions(settings);
 }
+
 /**
  * Generate checkboxes based in available options.
- * @param {*} settings 
+ * @param {JSON} settings 
  */
 function generateOptions(settings) {
     // Get element where is going to add the new checkboxes.
@@ -34,7 +44,7 @@ function generateOptions(settings) {
             checkbox.type = "checkbox";
         }
         checkbox.id = "option_" + i;
-        checkbox.name = "checkGroup "
+        checkbox.name = "checkGroup"
         // Create the label for the checkbox.
         var label = document.createElement('label');
         label.htmlFor = "option_" + i;
@@ -43,4 +53,96 @@ function generateOptions(settings) {
         container.appendChild(checkbox);
         container.appendChild(label);
     }
+}
+
+/**
+ * @function validateVoting used for check if the vote is valid or not
+ * @returns {undefined}
+ */
+function validateVoting() {
+    var count = 0; 
+    var selectElementList = [];
+    var checkboxes = document.getElementById("options_container").checkGroup;
+    for (var element in checkboxes) {
+        if (checkboxes[element].checked) {
+            selectElementList.push(getLabelTextOption(element));
+            count = count + 1;
+        }
+    }
+    //verify that mode type of voting is 'multiple' 
+    if(votingSetting.getModeType()=="multiple"){
+        multipleVotingValidation(count, selectElementList);
+    }
+    //the mode type is 'unica'
+    else{
+        uniqueVotingValidation(count,selectElementList);
+    }
+}
+
+/**
+ * @function getLabelTextOption function thet search in label list the text of check selected
+ * @param {number} position position of label of element for check
+ * @returns {string} return text of the label in positon search
+ */
+function getLabelTextOption(position) {
+    var labels =  document.getElementsByTagName("label");
+    return labels[position].innerText;
+}
+
+/**
+ * @function multipleVotingValidation verify data of multiple voting
+ * @param {number} count quantity of options that the person check
+ * @param {list} textList  list with text of each elements selected
+ * @returns {undefined}
+ */
+function multipleVotingValidation(count, textList) {
+     //verify if the quantity of choices is the same or less that the top quantity 
+     if((votingSetting.getModeQuantity()>=count) && (count>0)){
+        showNotification("Your select options was: "+ textList);
+    }
+    else if((votingSetting.getIsWhite()) && (count===0)){
+        //verify if person can vote blank
+        showNotification("Your vote was in blank")
+    }
+    //if the quantity is more that the top quantity or zero with isWhite false
+    else if(count > 0){
+        showNotification("Error you only can select "+votingSetting.getModeQuantity())
+    }
+    else{
+        showNotification("Error you need to select one vote")
+    }
+    
+    console.log(count)
+}
+
+/**
+ * @function uniqueVotingValidation verify data of unique voting
+ * @param {number} count quantity of options that the person check
+ * @param {list} textList  list with text of each elements selected
+ * @returns {undefined}
+ */
+function uniqueVotingValidation(count, textList) {
+    //person was decided to vote in blank
+    if((votingSetting.getIsWhite()) && (count===0)){
+        showNotification("Your vote was in blank")
+    }
+    //person select the second element
+    else if(count>0){
+        showNotification("Your vote was: "+ textList[0]);
+    }
+    else{
+        showNotification("Error you need to select one vote")
+    }
+}
+
+/**
+ * @function showHide this function show notification when the person vote
+ * @param {string} text give the text for the notification
+ * @returns {undefined} show in html the info
+ */
+function showNotification(text) {
+    var divElement = document.getElementById("notification");
+    divElement.style.display = "block";
+    divElement.innerHTML = text
+
 }
