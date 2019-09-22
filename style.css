@@ -1,21 +1,182 @@
-#container{
-    opacity: 0.8;
-    transition: opacity 2s ease-in-out;
+html {
+  height: 100%;
+  width: 100%;
 }
 
-#container:active {
-    opacity: 0;
-    /* animation-name: private_mode;
-    animation-duration: 2s; */
-    /* animation-fill-mode: forwards; */
-    /* animation-play-state: paused;       */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: lightseagreen;
 }
-@keyframes private_mode {
-    0% { opacity:0.8; }
-    20% { opacity:0.6; }
-    40% { opacity:0.4; }
-    60% { opacity:0.2; }
-    80% { opacity:0.1; }
-    100% { opacity:0; }
+
+#text_json {
+  width: 80%;
+  margin-left: 9%;
+  margin-right: 9%;
+  height: 80%;
+  background-color: rgb(192, 205, 209);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 27px;
 }
-/* cuando se envie el boto este estilo se desactiva */
+
+#title_login,
+#question_text {
+  font-size: 40px;
+  height: 20%;
+  font-family: "Times New Roman", Times, serif;
+}
+
+#table_login {
+  height: 100%;
+  width: 100%;
+}
+
+#title_row {
+  height: 25%;
+  text-align: center;
+}
+
+#text_row {
+  height: 60%;
+}
+
+#btn_row {
+  height: 15%;
+  width: 100%;
+  text-align: center;
+}
+
+#btn_Login {
+  height: 100%;
+  width: 20%;
+  font-size: 24px;
+  font-family: "Times New Roman", Times, serif;
+  border-radius: 50%;
+  border: none;
+}
+
+#btn_Login:hover {
+  background-color: darkgrey;
+}
+
+#options_container {
+  width: 80%;
+  margin-left: 9%;
+  margin-right: 9%;
+  height: 80%;
+  background-color: rgb(192, 205, 209);
+  font-family: "Times New Roman", Times, serif;
+  font-size: 27px;
+  min-height: 50px;
+  max-height: 80%;
+  overflow: auto;
+}
+
+#notification {
+  width: 100%;
+  padding: 15px 0;
+  text-align: center;
+  background-color: rgb(192, 205, 209);
+  margin-top: 10px;
+}
+.labelInput{
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+}
+.option {
+  display: inline-block;
+  float: left;
+  width: 20px;
+  height: 20px;
+  background: #ddd;
+  border-radius: 100%;
+  position: relative;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (max-width: 804px) and (min-width: 604px) {
+  #title_login,
+  #question_text {
+    font-size: 30px;
+  }
+
+  #btn_Login {
+    font-size: 21px;
+  }
+
+  #text_json {
+    font-size: 21px;
+  }
+  #options_container {
+    font-size: 21px;
+  }
+  .labelInput,
+  #options_title {
+    font-size: 21px;
+  }
+}
+
+@media screen and (max-width: 604px) and (min-width: 505px) {
+  #title_login,
+  #question_text {
+    font-size: 24px;
+  }
+  #btn_Login {
+    font-size: 18px;
+  }
+  #text_json {
+    font-size: 18px;
+  }
+  #options_container {
+    font-size: 18px;
+  }
+  .labelInput,
+  #options_title {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 505px) {
+  #title_login,
+  #question_text {
+    font-size: 18px;
+  }
+  #btn_Login {
+    font-size: 12px;
+  }
+  #text_json {
+    font-size: 12px;
+  }
+  #options_container {
+    font-size: 12px;
+  }
+  .labelInput,
+  #options_title {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 205px) {
+  #title_login,
+  #question_text {
+    font-size: 12px;
+  }
+  #btn_Login {
+    font-size: 6px;
+  }
+  #text_json {
+    font-size: 6px;
+  }
+  #options_container {
+    font-size: 6px;
+  }
+  #options_title {
+    font-size: 6px;
+  }
+}
