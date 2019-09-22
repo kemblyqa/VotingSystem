@@ -1,26 +1,11 @@
-var container_elem = document.getElementById("container");
 //Global variable with timer
 var privateEventTimer;
 //Global variable with the class VotingSetting
 var votingSetting;
 
-container_elem.addEventListener("mouseup", (e)=>{
-    e.preventDefault();
-    var current_opacity = window.getComputedStyle(container_elem, null).getPropertyValue("opacity");
-    console.log("mouseup event", container_elem.style.opacity);
-    container_elem.style.opacity = current_opacity;
-    console.log(current_opacity);
-    eventMouseClick();
-})
-container_elem.addEventListener("mousedown", (e)=>{
-    e.preventDefault();
-    container_elem.style.transition = "opacity 2s ease-in-out";
-    container_elem.style.opacity = 0;
-})
-container_elem.addEventListener("click", (e)=>{
-    e.preventDefault();
-    eventMouseClick();    
-})
+var options_container;
+
+
 function eventMouseClick() {
     clearTimeout(privateEventTimer);
     privateEventTimer = setTimeout(()=>{
@@ -29,8 +14,8 @@ function eventMouseClick() {
 };
 
 function revertPrivateMode(){
-    container_elem.style.transition = "opacity 1s ease-in-out";
-    container_elem.style.opacity = 0.8;
+    options_container.style.transition = "opacity 1s ease-in-out";
+    options_container.style.opacity = 0.8;
 }
 
 /**
@@ -39,7 +24,7 @@ function revertPrivateMode(){
  * @returns {undefined}
  */
 function callVotingPag() {
-    var jsonFile = document.getElementById('text_json').value
+    var jsonFile = document.getElementById('text_json').value;
     localStorage.setItem("file", jsonFile);
     window.location.href = 'ballot.html';
 }
@@ -58,6 +43,7 @@ function callUpdateVoting() {
  * @param {string} settings json to set the interface.
  */
 function updateVoting(settings) {
+    options_container = document.getElementById("text_row");
     votingSetting = null;
     var settings = JSON.parse((settings))
 
@@ -70,8 +56,28 @@ function updateVoting(settings) {
     // Set options title from settings.
     var text = "Selección [" + settings.modalidad.modo + "] puede selecionar [" + settings.modalidad.cantidad + "] opciones"
     document.getElementById("options_title").innerHTML = text;
+    // Set private mode if it is required
+    if (!votingSetting.getPublic()) privateMode();
     //  Call the function to generate all options.
     generateOptions(settings);
+}
+
+function privateMode(){
+    options_container.addEventListener("mouseup", (e)=>{
+        e.preventDefault();
+        var current_opacity = window.getComputedStyle(options_container, null).getPropertyValue("opacity");
+        options_container.style.opacity = current_opacity;
+        eventMouseClick();
+    })
+    options_container.addEventListener("mousedown", (e)=>{
+        e.preventDefault();
+        options_container.style.transition = "opacity 2s ease-in-out";
+        options_container.style.opacity = 0;
+    })
+    options_container.addEventListener("click", (e)=>{
+        e.preventDefault();
+        eventMouseClick();    
+    })
 }
 
 /**
