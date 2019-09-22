@@ -67,7 +67,7 @@ function generateOptions(settings) {
         // Create the label for the checkbox.
         var label = document.createElement('label');
         label.htmlFor = "option_" + i;
-        label.className = "inputContainer";
+        label.className = "labelInput";
         label.appendChild(document.createTextNode(settings.opciones[i]));
         // Add checkbox and label to the container.
         container.appendChild(checkbox);
