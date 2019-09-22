@@ -1,0 +1,13 @@
+{
+    "descripcion": "Dar aval el proyecto de ley #12345",
+    "opciones": [
+        "a favor",
+        "en contra"
+    ],
+    "modalidad": {
+        "modo": "unica",
+        "cantidad": 1
+    },
+    "enBlanco": true,
+    "publica": false
+}

@@ -1,0 +1,17 @@
+{
+    "descripcion": "Candidatos a concierto de la independencia",
+    "opciones": [
+        "Debi Nova",
+        "Guadalupe Urbina",
+        "Walter Ferguson",
+        "Tamela Hedström",
+        "Arnoldo Castillo Villalobos"
+    ],
+    "modalidad": {
+        "modo": "multiple",
+        "cantidad": 3
+    },
+    "enBlanco": false,
+    "publica": true
+}
+    
