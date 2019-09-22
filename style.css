@@ -1,21 +1,4 @@
-#container{
+.setting_private_mode {
     opacity: 0.8;
-    transition: opacity 2s ease-in-out;
-}
-
-#container:active {
-    opacity: 0;
-    /* animation-name: private_mode;
-    animation-duration: 2s; */
-    /* animation-fill-mode: forwards; */
-    /* animation-play-state: paused;       */
-}
-@keyframes private_mode {
-    0% { opacity:0.8; }
-    20% { opacity:0.6; }
-    40% { opacity:0.4; }
-    60% { opacity:0.2; }
-    80% { opacity:0.1; }
-    100% { opacity:0; }
 }
 /* cuando se envie el boto este estilo se desactiva */
