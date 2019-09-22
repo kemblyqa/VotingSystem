@@ -1,7 +1,6 @@
-.private_mode {
+.container_opts {
     opacity: 0.8;
 }
-/* cuando se envie el boto este estilo se desactiva */
 html {
   height: 100%;
   width: 100%;

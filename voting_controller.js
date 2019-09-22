@@ -2,21 +2,8 @@
 var privateEventTimer;
 //Global variable with the class VotingSetting
 var votingSetting;
-
-var options_container;
-
-
-function eventMouseClick() {
-    clearTimeout(privateEventTimer);
-    privateEventTimer = setTimeout(()=>{
-        revertPrivateMode();
-    }, 5000);
-};
-
-function revertPrivateMode(){
-    options_container.style.transition = "opacity 1s ease-in-out";
-    options_container.style.opacity = 0.8;
-}
+//Global variable with the options reference
+var options_container = null;
 
 /**
  * @function callVotingPag call ballot page.
@@ -39,45 +26,88 @@ function callUpdateVoting() {
 }
 
 /** 
- * Function that create a interface based in a json file.
+ * @function updateVoting create a interface based in a json file.
  * @param {string} settings json to set the interface.
  */
 function updateVoting(settings) {
     options_container = document.getElementById("text_row");
     votingSetting = null;
     var settings = JSON.parse((settings))
-
     //create variables with data of json
     var { descripcion, opciones, modalidad, enBlanco, publica } = settings;
     votingSetting = new VotingSetting(descripcion, opciones, modalidad.modo, modalidad.cantidad, enBlanco, publica);
-
     // Set question title from settings.
     document.getElementById("question_text").innerHTML = settings.descripcion;
     // Set options title from settings.
     var text = "Selección [" + settings.modalidad.modo + "] puede selecionar [" + settings.modalidad.cantidad + "] opciones"
     document.getElementById("options_title").innerHTML = text;
     // Set private mode if it is required
-    if (!votingSetting.getPublic()) privateMode();
+    if (!votingSetting.getPublic()) enablePrivateMode();
     //  Call the function to generate all options.
     generateOptions(settings);
 }
 
-function privateMode(){
-    options_container.addEventListener("mouseup", (e)=>{
-        e.preventDefault();
-        var current_opacity = window.getComputedStyle(options_container, null).getPropertyValue("opacity");
-        options_container.style.opacity = current_opacity;
-        eventMouseClick();
-    })
-    options_container.addEventListener("mousedown", (e)=>{
-        e.preventDefault();
-        options_container.style.transition = "opacity 2s ease-in-out";
-        options_container.style.opacity = 0;
-    })
-    options_container.addEventListener("click", (e)=>{
-        e.preventDefault();
-        eventMouseClick();    
-    })
+/** 
+ * @function keepCurrentOpacityOptions Resets the 5s timeout when a click is detected.
+ */
+function keepCurrentOpacityOptions() {
+    clearTimeout(privateEventTimer);
+    privateEventTimer = setTimeout(()=>{
+        setOpacityAgain();
+    }, 5000);
+};
+
+/** 
+ * @function setOpacityAgain Set opacity as the beginning with a transition
+ */
+function setOpacityAgain(){
+    options_container.style.transition = "opacity 1s ease-in-out";
+    options_container.style.opacity = 0.8;
+}
+
+/** 
+ * @function enablePrivateMode Enables the private mode if is required
+ */
+function enablePrivateMode(){
+    //this listener helps to handle the moves of the mouse and changes the opacity according to this.
+    options_container.addEventListener("mouseup", setCurrentOpacity);
+    options_container.addEventListener("mousedown", changeOpacityEvent);
+    options_container.addEventListener("click", updateCurrentOpacity);
+}
+
+/** 
+ * @function setCurrentOpacity Get the opacity detected in mouseup and set this value to the current style of the options
+ * @param {any} Listener event
+ */
+function setCurrentOpacity(e) {
+    e.preventDefault();
+    var current_opacity = window.getComputedStyle(options_container, null).getPropertyValue("opacity");
+    options_container.style.opacity = current_opacity;
+    keepCurrentOpacityOptions();
+}
+
+/** 
+ * @function changeOpacityEvent Set a transition to change the opacity until the mouse is up
+ */
+function changeOpacityEvent() {
+    options_container.style.transition = "opacity 2s ease-in-out";
+    options_container.style.opacity = 0;
+}
+
+/** 
+ * @function updateCurrentOpacity If mouse clicks over the options, the timeout will be reseted
+ */
+function updateCurrentOpacity(e) {
+    keepCurrentOpacityOptions();   
+}
+
+/** 
+ * @function disablePrivateMode Removes the events that executes in private mode
+ */
+function disablePrivateMode(){
+    options_container.removeEventListener("mouseup", setCurrentOpacity);
+    options_container.removeEventListener("mousedown", changeOpacityEvent);
+    options_container.removeEventListener("click", updateCurrentOpacity);
 }
 
 /**
@@ -158,10 +188,12 @@ function multipleVotingValidation(count, textList) {
     //verify if the quantity of choices is the same or less that the top quantity 
     if ((votingSetting.getModeQuantity() >= count) && (count > 0)) {
         showNotification("Your select options was: " + textList);
+        if(!votingSetting.getPublic()) disablePrivateMode();
     }
     else if ((votingSetting.getIsWhite()) && (count === 0)) {
         //verify if person can vote blank
-        showNotification("Your vote was in blank")
+        showNotification("Your vote was in blank");
+        if(!votingSetting.getPublic()) disablePrivateMode();
     }
     //if the quantity is more that the top quantity or zero with isWhite false
     else if (count > 0) {
@@ -170,7 +202,6 @@ function multipleVotingValidation(count, textList) {
     else {
         showNotification("Error you need to select one vote")
     }
-
     console.log(count)
 }
 
@@ -183,11 +214,13 @@ function multipleVotingValidation(count, textList) {
 function uniqueVotingValidation(count, textList) {
     //person was decided to vote in blank
     if ((votingSetting.getIsWhite()) && (count === 0)) {
-        showNotification("Your vote was in blank")
+        showNotification("Your vote was in blank");
+        if(!votingSetting.getPublic()) disablePrivateMode();
     }
     //person select the second element
     else if (count > 0) {
         showNotification("Your vote was: " + textList[0]);
+        if(!votingSetting.getPublic()) disablePrivateMode();
     }
     else {
         showNotification("Error you need to select one vote")
