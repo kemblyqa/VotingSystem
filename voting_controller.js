@@ -6,7 +6,8 @@ var votingSetting;
  * @param {*} jsonFile 
  * @returns {undefined}
  */
-function callVotingPag(jsonFile) {
+function callVotingPag() {
+    var jsonFile = document.getElementById('text_json').value
     localStorage.setItem("file", jsonFile);
     window.location.href = 'ballot.html';
 }
