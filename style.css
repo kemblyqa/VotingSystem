@@ -21,7 +21,8 @@ body {
   font-size: 27px;
 }
 
-#title_login {
+#title_login,
+#question_text {
   font-size: 40px;
   height: 20%;
   font-family: "Times New Roman", Times, serif;
@@ -80,7 +81,7 @@ body {
   background-color: rgb(192, 205, 209);
   margin-top: 10px;
 }
-.labelInput {
+.labelInput{
   display: block;
   position: relative;
   padding-left: 35px;
@@ -104,7 +105,8 @@ body {
 }
 
 @media screen and (max-width: 804px) and (min-width: 604px) {
-  #title_login {
+  #title_login,
+  #question_text {
     font-size: 30px;
   }
 
@@ -118,10 +120,15 @@ body {
   #options_container {
     font-size: 21px;
   }
+  .labelInput,
+  #options_title {
+    font-size: 21px;
+  }
 }
 
 @media screen and (max-width: 604px) and (min-width: 505px) {
-  #title_login {
+  #title_login,
+  #question_text {
     font-size: 24px;
   }
   #btn_Login {
@@ -133,10 +140,15 @@ body {
   #options_container {
     font-size: 18px;
   }
+  .labelInput,
+  #options_title {
+    font-size: 18px;
+  }
 }
 
 @media screen and (max-width: 505px) {
-  #title_login {
+  #title_login,
+  #question_text {
     font-size: 18px;
   }
   #btn_Login {
@@ -147,5 +159,28 @@ body {
   }
   #options_container {
     font-size: 12px;
+  }
+  .labelInput,
+  #options_title {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 205px) {
+  #title_login,
+  #question_text {
+    font-size: 12px;
+  }
+  #btn_Login {
+    font-size: 6px;
+  }
+  #text_json {
+    font-size: 6px;
+  }
+  #options_container {
+    font-size: 6px;
+  }
+  #options_title {
+    font-size: 6px;
   }
 }
