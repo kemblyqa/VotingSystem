@@ -8,6 +8,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <table id="table_login">
+        <tr id="title_row">
+            <td>
+                <h1 id="title_login">BIENVENIDO AL SISTEMA DE VOTACION</h1>
+            </td>
+        </tr>
+        <tr id="text_row">
+            <td>
+                <textarea id="text_json" rows="4" cols="50"> </textarea>
+            </td>
+        </tr>
+        <tr id="btn_row"> 
+            <td>
+                <input id="btn_Login" type="button" value="INICIAR VOTACION" onclick="updateVoting(document.getElementById('text_json').value);"/>
+            </td>
+        </tr>
+    </table>
+    
+  
     
 </body>
 </html>

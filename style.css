@@ -1,0 +1,104 @@
+html{
+    height:100%;
+    width: 100%;
+}
+
+body{
+    margin:0;
+    padding:0;
+    height:100%;
+    width: 100%;
+    background-color: lightseagreen;
+}
+
+#text_json{
+    width: 80%;
+    margin-left: 9%;
+    margin-right: 9%;
+    height: 80%;
+    background-color: rgb(192, 205, 209);
+    font-family: "Times New Roman", Times, serif;
+    font-size: 27px;
+
+}
+
+#title_login{
+    font-size: 40px;
+    height: 20%;
+    font-family: "Times New Roman", Times, serif;
+}
+
+#table_login{
+    height: 100%;
+    width: 100%;
+}
+
+#title_row{
+    height: 25%;
+    text-align: center;
+}
+
+#text_row{
+    height: 60%;
+}
+
+#btn_row{
+    height: 15%;
+    width: 100%;
+    text-align: center;
+}
+
+#btn_Login{
+    height: 60%;
+    width: 40%;
+    font-size: 30px;
+    font-family: "Times New Roman", Times, serif;
+    border-radius: 50%;
+    border: none;
+}
+
+#btn_Login:hover{
+    background-color: darkgrey;
+}
+
+
+@media screen and (max-width: 804px) and (min-width: 604px) {
+    #title_login{
+        font-size: 30px;
+    }
+
+    #btn_Login{
+        font-size: 21px;
+    }
+
+    #text_json{
+        font-size: 21px;
+    
+    }
+}
+
+@media screen and (max-width: 604px) and (min-width: 505px) {
+    #title_login{
+        font-size: 24px;
+    }
+    #btn_Login{
+        font-size: 18px;
+    }
+    #text_json{
+        font-size: 18px;
+    
+    }
+}
+
+@media screen and (max-width: 505px) {
+    #title_login{
+        font-size: 18px;
+    }
+    #btn_Login{
+        font-size: 12px;
+    }
+    #text_json{
+        font-size: 12px;
+    
+    }
+}
