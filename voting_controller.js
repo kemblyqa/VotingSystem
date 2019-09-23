@@ -69,7 +69,9 @@ function setOpacityAgain(){
  * @function enablePrivateMode Enables the private mode if is required
  */
 function enablePrivateMode(){
-    //this listener helps to handle the moves of the mouse and changes the opacity according to this.
+    //set opacity value in private mode
+    options_container.style.opacity = 0.8;
+    //this listeners help to handle the moves of the mouse and changes the opacity according to this.
     options_container.addEventListener("mouseup", setCurrentOpacity);
     options_container.addEventListener("mousedown", changeOpacityEvent);
     options_container.addEventListener("click", updateCurrentOpacity);
