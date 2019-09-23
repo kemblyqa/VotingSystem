@@ -73,14 +73,15 @@ function enablePrivateMode(){
     options_container.addEventListener("mouseup", setCurrentOpacity);
     options_container.addEventListener("mousedown", changeOpacityEvent);
     options_container.addEventListener("click", updateCurrentOpacity);
+    options_container.addEventListener("touchend", setCurrentOpacity);
+    options_container.addEventListener("touchstart", changeOpacityEvent);
 }
 
 /** 
  * @function setCurrentOpacity Get the opacity detected in mouseup and set this value to the current style of the options
  * @param {any} Listener event
  */
-function setCurrentOpacity(e) {
-    e.preventDefault();
+function setCurrentOpacity() {
     var current_opacity = window.getComputedStyle(options_container, null).getPropertyValue("opacity");
     options_container.style.opacity = current_opacity;
     keepCurrentOpacityOptions();
@@ -108,6 +109,8 @@ function disablePrivateMode(){
     options_container.removeEventListener("mouseup", setCurrentOpacity);
     options_container.removeEventListener("mousedown", changeOpacityEvent);
     options_container.removeEventListener("click", updateCurrentOpacity);
+    options_container.removeEventListener("touchend", setCurrentOpacity);
+    options_container.removeEventListener("touchstart", changeOpacityEvent);
 }
 
 /**
