@@ -98,14 +98,14 @@ function changeOpacityEvent() {
 }
 
 /** 
- * @function updateCurrentOpacity If mouse clicks over the options, the timeout will be reseted
+ * @function updateCurrentOpacity If mouse clicks over the options, the timeout will be reset
  */
 function updateCurrentOpacity(e) {
     keepCurrentOpacityOptions();   
 }
 
 /** 
- * @function disablePrivateMode Removes the events that executes in private mode
+ * @function disablePrivateMode Removes the events that executes in private mode.
  */
 function disablePrivateMode(){
     options_container.removeEventListener("mouseup", setCurrentOpacity);
